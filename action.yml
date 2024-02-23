@@ -38,9 +38,8 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.pytest-root-dir }}
+    - ${{ inputs.overall-cov}}
     - ${{ inputs.pytest-tests-dir }}
-    - ${{ inputs.cov-omit-list }}
     - ${{ inputs.requirements-file }}
     - ${{ inputs.cov-threshold-single }}
     - ${{ inputs.cov-threshold-total }}
