@@ -1,9 +1,8 @@
 #!/bin/bash
 
 # --- Parameters --- #
-# $1: pytest-root-dir
+# $1: overall-cov
 # $2: tests dir
-# $3: cov-omit-list
 # $4: requirements filepath
 # $5: cov-threshold-single
 # $6: cov-threshold-total
@@ -17,23 +16,26 @@ if test -f "$4"; then
     python3 -m pip install -r $4 --no-cache-dir --user;
 fi
 
-# write omit str list to coverage file
-cat << EOF > $cov_config_fname
-[run]
-omit = $3
-EOF
+# # write omit str list to coverage file
+# cat << EOF > $cov_config_fname
+# [run]
+# omit = $3
+# EOF
 
-# get list recursively of dirs to run pytest-cov on
-find_cmd_str="find $1 -type d"
-pytest_dirs=$(eval "$find_cmd_str")
 
-# build cov argument for pytest cmd with list of dirs
-pytest_cov_dirs=""
-for dir in $pytest_dirs; do
-  pytest_cov_dirs+="--cov=${dir} "
-done
+# # get list recursively of dirs to run pytest-cov on
+# find_cmd_str="find $1 -type d"
+# pytest_dirs=$(eval "$find_cmd_str")
 
-output=$(python3 -m pytest $pytest_cov_dirs --cov-config=.coveragerc $2)
+# # build cov argument for pytest cmd with list of dirs
+# pytest_cov_dirs=""
+# for dir in $pytest_dirs; do
+#   pytest_cov_dirs+="--cov=${dir} "
+# done
+
+#replace $1 as the overall cov 
+
+output=$(python3 -m pytest --cov=$1 $2)
 
 # remove pytest-coverage config file
 if [ -f $cov_config_fname ]; then

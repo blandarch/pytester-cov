@@ -7,16 +7,12 @@ branding:
   icon: 'check-circle'
 
 inputs:
-  pytest-root-dir:
-    description: 'root directory to recursively search for .py files'
+  overall-cov:
+    description: 'overall coverage of where the framework will be tested'
     required: false
     default: '.'
   pytest-tests-dir:
     description: 'directory with pytest tests. if left empty will identify test(s) dir by default'
-    required: false
-    default: ''
-  cov-omit-list:
-    description: 'list of directories and/or files to ignore'
     required: false
     default: ''
   requirements-file:
